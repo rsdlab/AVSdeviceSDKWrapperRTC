@@ -1,0 +1,54 @@
+# AvsDeviceSDKWrapper CMake config file
+#
+# This file sets the following variables:
+# AvsDeviceSDKWrapper_FOUND - Always TRUE.
+# AvsDeviceSDKWrapper_INCLUDE_DIRS - Directories containing the AvsDeviceSDKWrapper include files.
+# AvsDeviceSDKWrapper_IDL_DIRS - Directories containing the AvsDeviceSDKWrapper IDL files.
+# AvsDeviceSDKWrapper_LIBRARIES - Libraries needed to use AvsDeviceSDKWrapper.
+# AvsDeviceSDKWrapper_DEFINITIONS - Compiler flags for AvsDeviceSDKWrapper.
+# AvsDeviceSDKWrapper_VERSION - The version of AvsDeviceSDKWrapper found.
+# AvsDeviceSDKWrapper_VERSION_MAJOR - The major version of AvsDeviceSDKWrapper found.
+# AvsDeviceSDKWrapper_VERSION_MINOR - The minor version of AvsDeviceSDKWrapper found.
+# AvsDeviceSDKWrapper_VERSION_REVISION - The revision version of AvsDeviceSDKWrapper found.
+# AvsDeviceSDKWrapper_VERSION_CANDIDATE - The candidate version of AvsDeviceSDKWrapper found.
+
+message(STATUS "Found AvsDeviceSDKWrapper-@PROJECT_VERSION@")
+set(AvsDeviceSDKWrapper_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(AvsDeviceSDKWrapper_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(AvsDeviceSDKWrapper_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(AvsDeviceSDKWrapper_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(AvsDeviceSDKWrapper_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(AvsDeviceSDKWrapper_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(AvsDeviceSDKWrapper_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(AvsDeviceSDKWrapper_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(AvsDeviceSDKWrapper_VERSION @PROJECT_VERSION@)
+set(AvsDeviceSDKWrapper_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(AvsDeviceSDKWrapper_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(AvsDeviceSDKWrapper_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(AvsDeviceSDKWrapper_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
